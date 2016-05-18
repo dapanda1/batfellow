@@ -866,7 +866,7 @@ boolean main(string goal)
 		abort("Desired Item could not be solved for. Please try again.");
 	}
 
-	if(limit_mode() != "batfellow")
+	if(limit_mode() != "batman")
 	{
 		abort("Batfellow not started, must be started in this mode of operation.");
 	}
