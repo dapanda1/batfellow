@@ -283,6 +283,7 @@ boolean batfellow(item goal)
 			}
 		}
 		use_familiar($familiar[none]);
+		cli_execute("/outfit none");
 		int oldSetting = get_property("choiceAdventure1133").to_int();
 		set_property("choiceAdventure1133", 1);
 		//open batfellow comic and start it.
