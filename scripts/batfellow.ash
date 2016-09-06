@@ -1,6 +1,6 @@
 script "batfellow.ash";
 notify cheesecookie;
-since r16936;
+since r17169;
 
 
 #	Thanks to ungawa (#404576) for providing a starting point for this script!
@@ -149,9 +149,22 @@ string batVenture(location loc, string combat, string charpage)
 	string encounter = get_property("lastEncounter");
 	int startTime = get_property("batmanTimeLeft").to_int();
 	string[int] batCombat = split_string(combat, ";");
+	int round = 0;
 
 	while(monster_hp() > 0)
 	{
+		round = round + 1;
+		if(round == 30)
+		{
+			print("Too many rounds have occurred, refreshing under the assumption that tracking is flawed.", "red");
+			cli_execute("refresh all");
+		}
+		if(round == 50)
+		{
+			print("Only eggs should take 50 rounds.", "green");
+			abort("Combat resolution failure, aborting. Resolve combat manually and restart. Reporting this would be nice but you are probably not cool enough to report it, jerkwad.");
+			
+		}
 		if(my_hp() == 0)
 		{
 			abort("Batfellow has fallen...");
