@@ -458,7 +458,7 @@ boolean batfellow(item goal)
 			{
 				int index = 8;
 				while(index >= 0)
-				{					
+				{
 					if(batProgressIndex(index, page) < 100)
 					{
 						string combat = "bat-o-mite";
@@ -475,8 +475,6 @@ boolean batfellow(item goal)
 						{
 							string temp = visit_url("choice.php?whichchoice=1135&option=4&pwd=");
 						}
-
-						
 
 						while((batProgressIndex(index, page) < 100) && (get_property("batmanTimeLeft").to_int() > 0))
 						{
@@ -623,10 +621,9 @@ boolean batfellow(item goal)
 					{
 						string temp = visit_url("place.php?whichplace=batman_industrial&action=batman_industrial_car");
 						temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
-						
 					}
 				}
-				else if((item_amount($item[Incriminating Evidence]) + item_amount($item[Fingerprint Dusting Kit])) < evidence)
+				else if(((item_amount($item[Incriminating Evidence]) + item_amount($item[Fingerprint Dusting Kit])) < evidence) && (batProgressIndex(8,page) < 100))
 				{
 					if((item_amount($item[Exploding Kickball]) > 0) && (batProgressIndex(8,page) < 100))
 					{
