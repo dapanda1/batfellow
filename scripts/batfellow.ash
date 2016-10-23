@@ -454,7 +454,7 @@ boolean batfellow(item goal)
 				print("In the batCavern, need to batimate the batJokester!", "green");
 				string temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
 			}
-			else if((item_amount($item[Exploding Kickball]) > kickballs) && (item_amount($item[Fingerprint Dusting Kit]) > evidence))
+			else if((item_amount($item[Exploding Kickball]) > kickballs) && ((item_amount($item[Fingerprint Dusting Kit]) > evidence) || (batProgressIndex(8, page) >= 100)))
 			{
 				int index = 8;
 				while(index >= 0)
