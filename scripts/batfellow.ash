@@ -331,9 +331,17 @@ boolean batfellow(item goal)
 			kickballs = 500 / 20;
 			evidence = 500 / 16;
 		}
-		#print("Want " + kickballs + " kickballs", "green");
-		#print("Want " + evidence + " evidence", "green");
 
+		if(batProgressIndex(8, page) >= 100)
+		{
+			evidence = -1;
+		}
+		if(batProgressIndex(6, page) >= 100)
+		{
+			kickballs = -1;
+		}
+
+		print("Want " + kickballs + " batballs and " + evidence + " batvidence", "green");
 
 		//Primary functioning loop.
 		wait(1);
@@ -454,7 +462,7 @@ boolean batfellow(item goal)
 				print("In the batCavern, need to batimate the batJokester!", "green");
 				string temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
 			}
-			else if((item_amount($item[Exploding Kickball]) > kickballs) && ((item_amount($item[Fingerprint Dusting Kit]) > evidence) || (batProgressIndex(8, page) >= 100)))
+			else if((item_amount($item[Exploding Kickball]) > kickballs) && (item_amount($item[Fingerprint Dusting Kit]) > evidence))
 			{
 				int index = 8;
 				while(index >= 0)
@@ -585,6 +593,7 @@ boolean batfellow(item goal)
 			}
 			temp = visit_url("place.php?whichplace=batman_downtown&action=batman_downtown_car");
 			if((item_amount($item[Exploding Kickball]) > kickballs) && (item_amount($item[Fingerprint Dusting Kit]) > evidence))
+
 			{
 				temp = visit_url("choice.php?whichchoice=1135&option=1&pwd=");
 			}
