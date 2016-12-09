@@ -277,6 +277,7 @@ void batfellowSpeech(int zone)
 
 boolean batfellow(item goal)
 {
+	cli_execute("/aa none");
 	if((goal == $item[none]) || (goal != convertBatfellow(to_string(goal))))
 	{
 		print("Can not attempt to acquire " + goal + " via Batfellow. Sorry.", "red");
