@@ -1,7 +1,5 @@
 script "batfellow.ash";
-notify cheesecookie;
 since r17264;
-
 
 #	Thanks to ungawa (#404576) for providing a starting point for this script!
 #	Thanss to lightwolf (#61661) for the layout of Kickball Fellow (http://alliancefromhell.com/viewtopic.php?f=1&p=91032)
@@ -39,14 +37,12 @@ since r17264;
 
 boolean batfellow(item goal);
 item convertBatfellow(string goal);
-void batfellowHUD();
 int getBatStat(string what);
 int batfellowUpgrade();
 int batProgress(int snarfblat, string page);
 int batProgress(item goal, string page);
 int batProgressIndex(int index, string page);
 string batVenture(location loc, string combat, string page);
-void batfellowSpeech(int zone);
 void batInvestigation();
 int batGoalIndex(item goal);
 void endBatFellow();
@@ -85,7 +81,6 @@ string batVenture(location loc, string combat, string charpage)
 	if(choiceMatcher.find())
 	{
 		int choice = choiceMatcher.group(1).to_int();
-		print("BatChoice: " + choice, "green");
 		int option = 0;
 
 		int left = 900;
@@ -174,7 +169,6 @@ string batVenture(location loc, string combat, string charpage)
 		int lasthp = monster_hp();
 		foreach index, batAction in batCombat
 		{
-			print("Bat action:::: " + "fight.php?action=skill&whichskill=" + to_int(to_skill(batAction)), "green");
 			if((batAction == "kickball") && (item_amount($item[Exploding Kickball]) == 0))
 			{
 				batAction = "bat-o-mite";
@@ -206,11 +200,7 @@ string batVenture(location loc, string combat, string charpage)
 			{
 				batAction = "bat-jute";
 			}
-			print("Batction! " + batAction, "green");
-			if(batAction == "bat-jute")
-			{
-				print("NANANANANANA BAT-JUTE!!!!!", "green");
-			}
+
 			string temp = visit_url("fight.php?action=skill&whichskill=" + to_int(to_skill(batAction)));
 			if(!contains_text(temp, "Bat-Punch"))
 			{
@@ -254,25 +244,6 @@ string batVenture(location loc, string combat, string charpage)
 	}
 	return "";
 }
-
-
-void batfellowSpeech(int zone)
-{
-	boolean[string] text = $strings[Who\'s the man with the plan\, not a friend of master hand? Batfellow! Batfellow Batfellow!, Yo-Yo Ma nanana\, nanananananan! Batfellow! Batfellow! Batfellow!!, He\'s so mellow like a color maybe it is red! Batfellow! Batfellow! Batfellow!!, Nanananananananana Batfellow!!!, Boris had a mighty bellow but he is not Batfellow. Batfellow!!!, He could even play a cello\, Batfellow!!!, Can afford a bath in jello\, Batfellow! Batfellow!!, Gonna save Gotpork\, bork bork bork bork! Batfellow!!];
-
-	int i = 0;
-	int which = random(count(text));
-	foreach it in text
-	{
-		if(i == which)
-		{
-			print(it, "green");
-		}
-		i += 1;
-	}
-
-}
-
 
 
 boolean batfellow(item goal)
@@ -342,10 +313,7 @@ boolean batfellow(item goal)
 			kickballs = -1;
 		}
 
-		print("Want " + kickballs + " batballs and " + evidence + " batvidence", "green");
-
 		//Primary functioning loop.
-		wait(1);
 		if(get_property("batmanZone") == "Bat-Cavern")
 		{
 			int fundsAvailable = get_property("batmanFundsAvailable").to_int();
@@ -396,12 +364,10 @@ boolean batfellow(item goal)
 					temp = visit_url("shop.php?whichshop=batman_cave&action=buyitem&quantity=" + quantity + "&whichrow=784");
 				}
 			}
-			print("Time to camp it up! Out of this cavern!", "blue");
 			string temp = visit_url("place.php?whichplace=batman_cave&action=batman_cave_car");
 			if((item_amount($item[Exploding Kickball]) > kickballs) && (item_amount($item[Fingerprint Dusting Kit]) > evidence) && (batProgressIndex(batGoalIndex(goal), page) < 100))
 			{
 				int index = batGoalIndex(goal);
-				print("batTime for mah goal: " + goal + " (" + index + ")", "green");
 				if(index <= 2)
 				{
 					string temp = visit_url("choice.php?whichchoice=1135&option=5&pwd=");
@@ -424,18 +390,15 @@ boolean batfellow(item goal)
 					endBatFellow();
 					return false;
 				}
-				print("BatBoss BatItem BatTime!", "green");
 				batVenture(to_location(index+464), "kickball", page);
 				matcher choiceMatcher = create_matcher("whichchoice(?:\\s+)value=(\\d+)", visit_url("main.php"));
 				if(choiceMatcher.find())
 				{
 					int choice = choiceMatcher.group(1).to_int();
-					print("BatChoice: " + choice, "green");
 					page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
 					page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
 					page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
 				}
-				print("Returning to batBase", "green");
 
 				if(index <= 2)
 				{
@@ -460,7 +423,6 @@ boolean batfellow(item goal)
 			}
 			else if(left == 0)
 			{
-				print("In the batCavern, need to batimate the batJokester!", "green");
 				string temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
 			}
 			else if((item_amount($item[Exploding Kickball]) > kickballs) && (item_amount($item[Fingerprint Dusting Kit]) > evidence))
@@ -495,18 +457,15 @@ boolean batfellow(item goal)
 							endBatFellow();
 							return false;
 						}
-						print("BatBoss batTime!", "green");
 						batVenture(to_location(index+464), "kickball", page);
 						matcher choiceMatcher = create_matcher("whichchoice(?:\\s+)value=(\\d+)", visit_url("main.php"));
 						if(choiceMatcher.find())
 						{
 							int choice = choiceMatcher.group(1).to_int();
-							print("BatChoice: " + choice, "green");
 							page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
 							page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
 							page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
 						}
-						print("Returning to batBase", "green");
 
 						if(index <= 2)
 						{
@@ -529,7 +488,6 @@ boolean batfellow(item goal)
 				}
 				if(index == -2)
 				{
-					print("In the batCavern, need to batimate the batJokester!", "green");
 					string temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
 				}
 			}
@@ -589,7 +547,6 @@ boolean batfellow(item goal)
 				temp = visit_url("choice.php?whichchoice=1170&option=1&pwd=");
 				temp = visit_url("choice.php?whichchoice=1170&option=1&pwd=");
 				temp = visit_url("choice.php?whichchoice=1168&option=1&pwd=");
-				print("BatDone, Batastic.", "blue");
 				return true;
 			}
 			temp = visit_url("place.php?whichplace=batman_downtown&action=batman_downtown_car");
@@ -611,7 +568,6 @@ boolean batfellow(item goal)
 				string temp = visit_url("place.php?whichplace=batman_industrial&action=batman_industrial_car");
 				temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
 			}
-			batfellowSpeech(3);
 			if(!contains_text(get_property("batmanStats"), "Inquisitee"))
 			{
 				if(item_amount($item[Bat-o-mite]) > 0)
@@ -660,8 +616,6 @@ boolean batfellow(item goal)
 			string temp = visit_url("place.php?whichplace=batman_park&action=batman_park_car");
 			temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
 		}
-		wait(1);
-		//abort("Incomplete Beep.");
 	}
 
 	return true;
@@ -787,60 +741,19 @@ int batfellowUpgrade()
 	return 0;
 }
 
-
-void batfellowHUD()
-{
-	if(limit_mode() != "batman")
-	{
-		abort("Only true heroes have a representation of their statistics.");
-	}
-
-
-	string page = visit_url("charpane.php");
-	batInvestigation();
-
-
-	print_html("<table border=1><tr><td colspan=2>BAT STATS: So awesome!</td></tr>");
-	print_html("<tr><td>BatTime:</td><td>" + get_property("batmanTimeLeft") + "</td></tr>");
-	print_html("<tr><td>BatBucks:</td><td>" + get_property("batmanFundsAvailable") + " (Bonus:" + (get_property("batmanBonusInitialFunds")) + ")</td></tr>");
-	print_html("<tr><td>BatZone:</td><td>" + get_property("batmanZone") + "</td></tr>");
-	print_html("<tr><td>BatHealth:</td><td>" + getBatStat("Bat-Health") + "/" + getBatStat("Maximum Bat-Health") + "</td></tr>");
-	print_html("<tr><td>BatPunch:</td><td>" + getBatStat("Bat-Punch") + "(+" + getBatStat("Bat-Punch Modifier") + ",*" + getBatStat("Bat-Punch Multiplier") + ")</td></tr>");
-	print_html("<tr><td>BatKick:</td><td>" + getBatStat("Bat-Kick") + "(+" + getBatStat("Bat-Kick Modifier") + ",*" + getBatStat("Bat-Kick Multiplier") + ")</td></tr>");
-	print_html("<tr><td>BatResistance:</td><td> Heat:" + getBatStat("Bat-Heat Resistance") + " Spooky:" + getBatStat("Bat-Spooky Resistance") + " Stench:" + getBatStat("Bat-Stench Resistance") + "</td></tr>");
-
-
-
-	foreach batStat in $strings[Bat-Health Regeneration, Bat-Armor, Bat-Bulletproofing, Bat-Investigation Progress]
-	{
-		print_html("<tr><td>" + batStat + "</td><td>" + getBatStat(batStat) + "</td></tr>");
-	}
-
-	int index = 0;
-
-	foreach it in $items[Kudzu Salad, Mansquito Serum, Miss Graves\' Vermouth, The Plumber\'s Mushroom Stew, The Author\'s Ink, The Mad Liquor, Doc Clock\'s Thyme Cocktail, Mr. Burnsger, The Inquisitor\'s Unidentifiable Object]
-	{
-		print_html("<tr><td> " + to_location(464+index) + " </td><td> " + batProgressIndex(index,page) + " </td></tr>");
-		index += 1;
-	}
-
-
-	print_html("</table>");
-}
-
 int batGoalIndex(item goal)
 {
 	switch(goal)
 	{
 	case $item[Kudzu Salad]:								return 0;
 	case $item[Mansquito Serum]:							return 1;
-	case $item[Miss Graves\' Vermouth]:						return 2;
-	case $item[The Plumber\'s Mushroom Stew]:				return 3;
-	case $item[The Author\'s Ink]:							return 4;
+	case $item[Miss Graves' Vermouth]:						return 2;
+	case $item[The Plumber's Mushroom Stew]:				return 3;
+	case $item[The Author's Ink]:							return 4;
 	case $item[The Mad Liquor]:								return 5;
-	case $item[Doc Clock\'s Thyme Cocktail]:				return 6;
+	case $item[Doc Clock's Thyme Cocktail]:				return 6;
 	case $item[Mr. Burnsger]:								return 7;
-	case $item[The Inquisitor\'s Unidentifiable Object]:	return 8;
+	case $item[The Inquisitor's Unidentifiable Object]:	return 8;
 	}
 	return -1;
 }
@@ -848,7 +761,7 @@ int batGoalIndex(item goal)
 item convertBatfellow(string goal)
 {
 	item retval = to_item(goal);
-	if($items[Kudzu Salad, Mansquito Serum, Miss Graves\' Vermouth, The Plumber\'s Mushroom Stew, The Author\'s Ink, The Mad Liquor, Doc Clock\'s Thyme Cocktail, Mr. Burnsger, The Inquisitor\'s Unidentifiable Object] contains retval)
+	if($items[Kudzu Salad, Mansquito Serum, Miss Graves' Vermouth, The Plumber's Mushroom Stew, The Author's Ink, The Mad Liquor, Doc Clock's Thyme Cocktail, Mr. Burnsger, The Inquisitor's Unidentifiable Object] contains retval)
 	{
 		return retval;
 	}
@@ -856,16 +769,16 @@ item convertBatfellow(string goal)
 	{
 	case 1:		retval = $item[Kudzu Salad];									break;
 	case 2:		retval = $item[Mansquito Serum];								break;
-	case 3:		retval = $item[Miss Graves\' Vermouth];							break;
-	case 4:		retval = $item[The Plumber\'s Mushroom Stew];					break;
-	case 5:		retval = $item[The Author\'s Ink];								break;
+	case 3:		retval = $item[Miss Graves' Vermouth];							break;
+	case 4:		retval = $item[The Plumber's Mushroom Stew];					break;
+	case 5:		retval = $item[The Author's Ink];								break;
 	case 6:		retval = $item[The Mad Liquor];									break;
-	case 7:		retval = $item[Doc Clock\'s Thyme Cocktail];					break;
+	case 7:		retval = $item[Doc Clock's Thyme Cocktail];					break;
 	case 8:		retval = $item[Mr. Burnsger];									break;
-	case 9:		retval = $item[The Inquisitor\'s Unidentifiable Object];		break;
+	case 9:		retval = $item[The Inquisitor's Unidentifiable Object];		break;
 	}
 
-	if($items[Kudzu Salad, Mansquito Serum, Miss Graves\' Vermouth, The Plumber\'s Mushroom Stew, The Author\'s Ink, The Mad Liquor, Doc Clock\'s Thyme Cocktail, Mr. Burnsger, The Inquisitor\'s Unidentifiable Object] contains retval)
+	if($items[Kudzu Salad, Mansquito Serum, Miss Graves' Vermouth, The Plumber's Mushroom Stew, The Author's Ink, The Mad Liquor, Doc Clock's Thyme Cocktail, Mr. Burnsger, The Inquisitor's Unidentifiable Object] contains retval)
 	{
 		return retval;
 	}
@@ -875,9 +788,7 @@ item convertBatfellow(string goal)
 void endBatFellow()
 {
 	string page = visit_url("choice.php?whichchoice=1168&option=1&pwd=");
-
 }
-
 
 boolean main(string goal)
 {
@@ -887,15 +798,8 @@ boolean main(string goal)
 		abort("Desired Item could not be solved for. Please try again.");
 	}
 
-	if(limit_mode() != "batman")
-	{
-		abort("Batfellow not started, must be started in this mode of operation.");
-	}
-
 	return batfellow(toGet);
 }
-
-
 
 int batProgress(int snarfblat, string page)
 {
@@ -904,7 +808,7 @@ int batProgress(int snarfblat, string page)
 int batProgress(item goal, string page)
 {
 	int index = 0;
-	foreach it in $items[Kudzu Salad, Mansquito Serum, Miss Graves\' Vermouth, The Plumber\'s Mushroom Stew, The Author\'s Ink, The Mad Liquor, Doc Clock\'s Thyme Cocktail, Mr. Burnsger, The Inquisitor\'s Unidentifiable Object]
+	foreach it in $items[Kudzu Salad, Mansquito Serum, Miss Graves' Vermouth, The Plumber's Mushroom Stew, The Author's Ink, The Mad Liquor, Doc Clock's Thyme Cocktail, Mr. Burnsger, The Inquisitor's Unidentifiable Object]
 	{
 		if(it == goal)
 		{
