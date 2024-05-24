@@ -260,6 +260,7 @@ boolean batfellow(item goal)
 
 	if(limit_mode() == "")
 	{
+		cli_execute("refresh all");
 		item toUse = $item[Special Edition Batfellow Comic];
 		if(item_amount($item[Special Edition Batfellow Comic]) == 0)
 		{
