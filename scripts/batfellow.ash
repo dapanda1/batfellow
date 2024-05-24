@@ -132,6 +132,9 @@ string batVenture(location loc, string combat, string charpage)
 					isDone = 0;
 				}
 				page = visit_url("choice.php?whichchoice=" + choice + "&option=" + option + "&pwd=");
+                                if(handling_choice() == false){ 
+					option = 1; 
+				}
 				option -= 1;
 			}
 		}
