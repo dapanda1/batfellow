@@ -1,4 +1,5 @@
-#			use 'batfellow.ash #' for the item
+//use 'batfellow.ash #' for the item
+
 #			1 Kudzu salad
 #			2 Mansquito Serum
 #			3 Miss Graves' vermouth
