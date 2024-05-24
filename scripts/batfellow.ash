@@ -415,7 +415,6 @@ boolean batfellow(item goal)
 
 
 				string temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
-				temp = visit_url("choice.php?whichchoice=1135&option=2&pwd=");
 			}
 			else if(left > 800)
 			{
