@@ -399,8 +399,9 @@ boolean batfellow(item goal)
 				{
 					int choice = choiceMatcher.group(1).to_int();
 					page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
+					while(handling_choice() == true){ 
 					page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
-					page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
+					}
 				}
 
 				if(index <= 2)
@@ -465,8 +466,9 @@ boolean batfellow(item goal)
 						{
 							int choice = choiceMatcher.group(1).to_int();
 							page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
-							page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
-							page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
+								while(handling_choice() == true){ 
+								page = visit_url("choice.php?whichchoice=" + choice + "&option=" + 1 + "&pwd=");
+								}
 						}
 
 						if(index <= 2)
