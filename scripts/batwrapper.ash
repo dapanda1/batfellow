@@ -1,4 +1,4 @@
-
+#			use 'batfellow.ash #' for the item
 #			1 Kudzu salad
 #			2 Mansquito Serum
 #			3 Miss Graves' vermouth
@@ -27,10 +27,11 @@ while (attempts < totalattempts) {
 cli_execute("batfellow.ash 2");
 attempts=attempts+1;
 }
+
 //cli_execute("set abortOnChoiceWhenNotInChoice = true");
 cli_execute("refresh all");
 
-//reapply sleeping gear
+//reapply sleeping gear and fam
 cli_execute("/outfit advnight");
 cli_execute("familiar Trick-or-Treating Tot");
 
